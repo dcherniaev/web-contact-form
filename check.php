@@ -9,7 +9,7 @@ if (empty($_POST["issue"])) {
 } else {
     $issue = clear_data($_POST["issue"]);
 }
-if (empty($_POST["name"])) {
+if (empty(clear_data($_POST["name"]))) {
     $nameErr = "Name is required";
 } else {
     $name = clear_data($_POST["name"]);
@@ -22,8 +22,8 @@ if (empty(clear_data($_POST["email"]))) {
         $emailErr = "Invalid email format";
     }
 }
-if (!empty($_POST["message"])) {
-    $message = clear_data($_POST["message"]);
+if (!empty(clear_data($_POST["message"]))) {
+    $message = ($_POST["message"]);
 }
 ?>
 <html>
