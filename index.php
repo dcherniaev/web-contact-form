@@ -57,7 +57,7 @@ switch ($issue){
     Message: <br>
     <textarea required name="message" cols="50" rows="10"><?php echo $message ?></textarea>
     <br>
-    <input type="submit" value="Send message">
+    <input type="submit" value="Next">
 </form>
 </body>
 </html>

@@ -22,9 +22,7 @@ if (empty(clear_data($_POST["email"]))) {
         $emailErr = "Invalid email format";
     }
 }
-if (empty($_POST["message"])) {
-    $message = "";
-} else {
+if (!empty($_POST["message"])) {
     $message = clear_data($_POST["message"]);
 }
 ?>
@@ -44,19 +42,41 @@ if (empty($_POST["message"])) {
     </tr>
     <tr>
         <td>Email:</td>
-        <td><?php echo $email ?><?php echo $emailErr ?></td>
+        <td><?php if ($emailErr == "") {
+                echo $email;
+            } else {
+                echo $emailErr;
+            } ?>
+        </td>
     </tr>
     <tr>
         <td>Message:</td>
         <td><?php echo $message ?><?php echo $messageErr ?></td>
     </tr>
+    <tr>
+        <td>
+            <form action="/index.php" method="post">
+                <input type="hidden" name="issue" value="<?php echo $issue ?>">
+                <input type="hidden" name="name" value="<?php echo $name ?>">
+                <input type="hidden" name="email" value="<?php echo $email ?>">
+                <input type="hidden" name="message" value="<?php echo $message ?>">
+                <input type="submit" value="Edit">
+            </form>
+        </td>
+        <td>
+            <?php if ($issueErr == "" && $nameErr == "" && $emailErr == "" && $messageErr == "") : ?>
+                <form action="/sendtodb.php" method="post">
+                    <input type="hidden" name="issue" value="<?php echo $issue ?>">
+                    <input type="hidden" name="name" value="<?php echo $name ?>">
+                    <input type="hidden" name="email" value="<?php echo $email ?>">
+                    <input type="hidden" name="message" value="<?php echo $message ?>">
+                    <input type="submit" value="Submit">
+                </form>
+            <?php endif; ?>
+
+        </td>
+    </tr>
 </table>
-<form action="/index.php" method="post">
-    <input type="hidden" name="issue" value="<?php echo $issue ?>">
-    <input type="hidden" name="name" value="<?php echo $name ?>">
-    <input type="hidden" name="email" value="<?php echo $email ?>">
-    <input type="hidden" name="message" value="<?php echo $message ?>">
-    <input type="submit" value="Edit">
-</form>
+
 </body>
 </html>
