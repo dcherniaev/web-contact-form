@@ -24,9 +24,10 @@ $sql_insert = "INSERT INTO $table (issue, name, email, message)
             VALUES ('$issue', '$name', '$email', '$message')";
 
 if (mysqli_query($conn, $sql_insert)) {
-    $result = "SUCCESS";
+    $result = "Successfully submitted";
 } else {
     $result = "ERROR IN INSERT";
 }
 echo $result;
 $conn->close();
+header( "refresh:2; url=/index.php");
